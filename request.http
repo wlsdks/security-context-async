@@ -1,0 +1,21 @@
+### 계정 생성
+POST http://localhost:8340/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+### 로그인
+POST http://localhost:8340/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+### 토큰을 이용한 비동기 요청
+GET http://localhost:8340/test/async
+Authorization: Bearer {여기에 토큰넣기: 괄호는 지우고}
