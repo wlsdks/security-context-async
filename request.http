@@ -18,4 +18,19 @@ Content-Type: application/json
 
 ### 토큰을 이용한 비동기 요청
 GET http://localhost:8340/test/async
-Authorization: Bearer {여기에 토큰넣기: 괄호는 지우고}
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTczNjE3Mjc4OSwiZXhwIjoxNzM2MTc2Mzg5fQ.BBeBZDMCrEfK1GGgi0FiD6PPLAhhs7PRA7tlM_jBtfY
+
+### small-async 요청1
+GET http://localhost:8340/test/small-async?username=UserA&requestId=1
+
+### small-async 요청2
+GET http://localhost:8340/test/small-async?username=UserB&requestId=2
+
+### small-async 요청3
+GET http://localhost:8340/test/small-async?username=UserC&requestId=3
+
+### small-async 요청4
+GET http://localhost:8340/test/small-async?username=UserD&requestId=4
+
+### small-async 요청5
+GET http://localhost:8340/test/small-async?username=UserE&requestId=5
