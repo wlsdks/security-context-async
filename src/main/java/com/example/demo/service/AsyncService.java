@@ -9,6 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AsyncService {
 
+    @Async
+    public void executeAsyncTask() {
+        String username = SecurityContextHolder.getContext().getAuthentication() != null
+                ? SecurityContextHolder.getContext().getAuthentication().getName()
+                : "No SecurityContext";
+
+        System.out.println("[@Async] Current User: " + username);
+    }
+
     @Async("asyncExecutor")
     public void executeWithDefaultAsync() {
         String username = SecurityContextHolder.getContext().getAuthentication() != null

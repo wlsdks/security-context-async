@@ -24,6 +24,9 @@ public class AsyncController {
             System.out.println("Main Thread: No SecurityContext");
         }
 
+        // @Async 메서드 호출
+        asyncService.executeAsyncTask();
+
         // Default Async (SecurityContext 미전파)
         asyncService.executeWithDefaultAsync();
 
