@@ -27,6 +27,22 @@ public class AsyncService {
         System.out.println("[Default Async] Current User: " + username);
     }
 
+    @Async("smallAsyncExecutor")
+    public void executeAsyncTask(String requestId) {
+        String username = SecurityContextHolder.getContext().getAuthentication() != null
+                ? SecurityContextHolder.getContext().getAuthentication().getName()
+                : "No SecurityContext";
+
+        System.out.printf(
+                "[Async Task] Request: %s, Thread: %s, SecurityContext: %s, User: %s%n",
+                requestId,
+                Thread.currentThread().getName(),
+                SecurityContextHolder.getContext(),
+                username
+        );
+    }
+
+
     @Async("securityAsyncExecutor")
     public void executeWithSecurityAsync() {
         String username = SecurityContextHolder.getContext().getAuthentication() != null

@@ -2,10 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.service.AsyncService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
 
 @RequiredArgsConstructor
 @RestController
@@ -34,6 +40,26 @@ public class AsyncController {
         asyncService.executeWithSecurityAsync();
 
         return "Async Test Triggered!";
+    }
+
+
+    @GetMapping("/test/small-async")
+    public String testAsync(@RequestParam String username, @RequestParam String requestId) {
+        // SecurityContext에 사용자 정보 설정
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        context.setAuthentication(new UsernamePasswordAuthenticationToken(
+                username, null, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+        ));
+        SecurityContextHolder.setContext(context);
+
+        // 현재 사용자 확인
+        System.out.printf("[Main Thread] Request: %s, Thread: %s, User: %s%n",
+                requestId, Thread.currentThread().getName(), username);
+
+        // 비동기 작업 실행
+        asyncService.executeAsyncTask(requestId);
+
+        return "Async Task Triggered!";
     }
 
 }
